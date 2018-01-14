@@ -47,7 +47,15 @@ app.get('/about', (req, res) => {
 
 //idea index
 app.get('/ideas', (req, res) => {
-    res.render('ideas/index');
+    Idea.find({}).sort({date: 'desc'}).then(ideas => {
+        res.render('ideas/index', {ideas: ideas});
+    });
+    
+});
+
+//edit idea form
+app.get('/ideas/edit/:id', (req, res) => {
+    res.render('ideas/edit');
 });
 
 //get idea form
